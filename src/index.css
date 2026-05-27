@@ -10,24 +10,26 @@
 
 @layer base {
   body {
-    @apply bg-warmWhite text-ink font-sans antialiased transition-colors duration-300;
+    /* Fondo Marrón / Letras Crema */
+    @apply bg-[#2D241E] text-[#FDF6F0] font-sans antialiased transition-colors duration-300;
   }
-  .dark body {
-    @apply bg-darkBg text-warmWhite;
+  
+  /* Botones y acentos Rosa Pastel */
+  .text-pink-300, .bg-pink-400, .text-pink-400 {
+    @apply text-[#FFB7C5] !important;
   }
+  .bg-pink-300, .bg-pink-400 {
+    @apply bg-[#FFB7C5] !important;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
   }
 }
+
 @layer utilities {
   .glass {
-    @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-soft;
-  }
-  .dark .glass {
-    @apply bg-darkBg-alt/60 border-white/10 shadow-soft-dark;
-  }
-  .text-balance {
-    text-wrap: balance;
+    @apply bg-[#2D241E]/80 backdrop-blur-xl border border-[#FFB7C5]/20 shadow-lg;
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
