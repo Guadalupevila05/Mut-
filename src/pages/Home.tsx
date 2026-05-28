@@ -23,12 +23,15 @@ export const Home = () => {
   const featuredTypes = PRODUCT_TYPES.slice(0, 8);
 
   useEffect(() => {
+    // Este mensaje aparecerá siempre que el componente cargue
+    console.log("EL CÓDIGO DE CONEXIÓN SE ESTÁ EJECUTANDO...");
+
     async function probarConexion() {
       const { data, error } = await supabase.from('products').select('*');
       if (error) {
-        console.error("Algo falló:", error.message);
+        console.error("Algo falló al conectar:", error.message);
       } else {
-        console.log("¡CONEXIÓN EXITOSA! Los productos son:", data);
+        console.log("¡ÉXITO! Productos encontrados:", data);
       }
     }
     probarConexion();
