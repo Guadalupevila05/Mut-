@@ -5,7 +5,7 @@ import { products, PRODUCT_TYPES } from '../data/mockData';
 import { supabase } from '../lib/supabaseClient';
 import { useEffect } from 'react';
 
-// Botón tipo píldora para ingresar (arriba a la derecha)
+// Botón tipo píldora para ingresar
 const AuthButton = () => (
   <div className="fixed top-8 right-8 z-50">
     <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
@@ -20,16 +20,17 @@ const AuthButton = () => (
 );
 
 export const Home = () => {
+  // LOG DE PRUEBA: Si esto no aparece en la consola, el archivo no está cargando.
+  console.log("CARGANDO COMPONENTE HOME.TSX...");
+
   const featuredTypes = PRODUCT_TYPES.slice(0, 8);
 
   useEffect(() => {
-    // Este mensaje aparecerá siempre que el componente cargue
-    console.log("EL CÓDIGO DE CONEXIÓN SE ESTÁ EJECUTANDO...");
-
+    console.log("EJECUTANDO EFECTO DE CONEXIÓN...");
     async function probarConexion() {
       const { data, error } = await supabase.from('products').select('*');
       if (error) {
-        console.error("Algo falló al conectar:", error.message);
+        console.error("Error en Supabase:", error.message);
       } else {
         console.log("¡ÉXITO! Productos encontrados:", data);
       }
@@ -40,8 +41,7 @@ export const Home = () => {
   return (
     <div className="min-h-screen pt-12 pb-12">
       <AuthButton />
-
-      {/* Hero Section */}
+      {/* Resto de tu código igual */}
       <section className="max-w-7xl mx-auto px-4 md:px-8 min-h-[75vh] flex flex-col items-center justify-center text-center">
         <div className="flex flex-col items-center space-y-8 z-10 max-w-3xl relative">
           <motion.div animate={{ rotate: 360 }} transition={{ duration: 16, repeat: Infinity, ease: "linear" }} className="absolute -inset-32 rounded-full pointer-events-none" style={{ background: "conic-gradient(from 0deg, #FFB7C5 0deg, transparent 330deg, #FFB7C5 360deg)", WebkitMask: "radial-gradient(transparent 72%, white 75%)", mask: "radial-gradient(transparent 72%, white 75%)" }} />
@@ -52,26 +52,15 @@ export const Home = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Categorías con Estilo Editorial */}
+      
       <section className="max-w-7xl mx-auto px-4 md:px-8 mt-24">
         <h2 className="text-2xl md:text-3xl font-display font-bold mb-8 tracking-tight">Comprá por prenda</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {featuredTypes.map((type, i) => (
             <Link to={`/feed?type=${type}`} key={type}>
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ delay: i * 0.05 }} 
-                className="aspect-square rounded-[2rem] border border-[#FFB7C5]/30 flex flex-col items-center justify-center p-6 transition-all duration-300 hover:scale-105 hover:bg-[#FFB7C5]/5 hover:border-[#FFB7C5] group"
-              >
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FFB7C5] mb-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                  MUTÁ SELECT
-                </span>
-                <span className="text-ink/90 dark:text-warmWhite/90 font-display font-bold text-xl tracking-tight text-center">
-                  {type}
-                </span>
+              <motion.div className="aspect-square rounded-[2rem] border border-[#FFB7C5]/30 flex flex-col items-center justify-center p-6 transition-all duration-300 hover:scale-105 hover:bg-[#FFB7C5]/5 hover:border-[#FFB7C5] group">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#FFB7C5] mb-2 opacity-80 group-hover:opacity-100 transition-opacity">MUTÁ SELECT</span>
+                <span className="text-ink/90 dark:text-warmWhite/90 font-display font-bold text-xl tracking-tight text-center">{type}</span>
               </motion.div>
             </Link>
           ))}
