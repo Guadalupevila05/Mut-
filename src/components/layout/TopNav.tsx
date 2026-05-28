@@ -18,20 +18,10 @@ export const TopNav = () => {
       
       <div className="max-w-7xl mx-auto glass rounded-full px-6 py-3 flex items-center justify-between">
         
-        {/* Espacio vacío donde antes estaba el logo, para que el menú no se desarme */}
+        {/* Espacio reservado para mantener el equilibrio del layout */}
         <div className="w-16 md:w-24"></div>
 
-        <nav className="hidden md:flex items-center gap-8">
-          <Link to="/feed" className="text-sm font-medium hover:opacity-70 transition-opacity">
-            Explorar
-          </Link>
-          <Link to="/feed" className="text-sm font-medium hover:opacity-70 transition-opacity">
-            Categorías
-          </Link>
-          <Link to="/profile/mutacommunity" className="text-sm font-medium hover:opacity-70 transition-opacity">
-            Comunidad
-          </Link>
-        </nav>
+        {/* Los enlaces fueron eliminados de aquí */}
 
         <div className="flex items-center gap-4">
           <Link to="/auth">
