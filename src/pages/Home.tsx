@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
-import { products, PRODUCT_TYPES } from '../data/mockData';
+import { PRODUCT_TYPES } from '../data/mockData';
 import { supabase } from '../lib/supabaseClient';
 import { useEffect } from 'react';
 
@@ -56,7 +56,7 @@ export const Home = () => {
       <section className="max-w-7xl mx-auto px-4 md:px-8 mt-24">
         <h2 className="text-2xl md:text-3xl font-display font-bold mb-8 tracking-tight">Comprá por prenda</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {featuredTypes.map((type, i) => (
+          {featuredTypes.map((type) => (
             <Link to={`/feed?type=${type}`} key={type}>
               <motion.div className="aspect-square rounded-[2rem] border border-[#FFB7C5]/30 flex flex-col items-center justify-center p-6 transition-all duration-300 hover:scale-105 hover:bg-[#FFB7C5]/5 hover:border-[#FFB7C5] group">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#FFB7C5] mb-2 opacity-80 group-hover:opacity-100 transition-opacity">MUTÁ SELECT</span>
