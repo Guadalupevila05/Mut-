@@ -1,35 +1,23 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
-type ThemeContextType = {
-  isDark: boolean;
-  toggleTheme: () => void;
-};
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-export function ThemeProvider({ children }: {children: React.ReactNode;}) {
-  const [isDark, setIsDark] = useState(false);
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (isDark) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-  }, [isDark]);
-  const toggleTheme = () => setIsDark(!isDark);
-  return (
-    <ThemeContext.Provider
-      value={{
-        isDark,
-        toggleTheme
-      }}>
-      
-      {children}
-    </ThemeContext.Provider>);
+import React, { createContext, useContext, useEffect } from 'react';
 
-}
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+// Creamos el contexto bloqueado en "isDark: true"
+const ThemeContext = createContext({
+  isDark: true,
+  toggleTheme: () => {},
+});
+
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  // Apenas carga la página, le clava la clase "dark" al HTML obligatoriamente
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={{ isDark: true, toggleTheme: () => {} }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
+
+export const useTheme = () => useContext(ThemeContext);

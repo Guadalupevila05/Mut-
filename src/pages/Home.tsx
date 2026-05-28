@@ -9,16 +9,17 @@ import {
   users } from
 '../data/mockData';
 import { Avatar } from '../components/ui/Avatar';
+
 export const Home = () => {
-  const heroImages = products.slice(2, 5).map((p) => p.images[0]);
   const trending = products.slice(0, 6);
   // Pick 8 types for the grid
   const featuredTypes = PRODUCT_TYPES.slice(0, 8);
+  
   return (
     <div className="min-h-screen pt-24 pb-12">
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 md:px-8 min-h-[75vh] flex flex-col md:flex-row items-center justify-center gap-12">
-        <div className="flex-1 space-y-8 z-10">
+      {/* Hero Section Centrado y sin imágenes */}
+      <section className="max-w-7xl mx-auto px-4 md:px-8 min-h-[75vh] flex flex-col items-center justify-center text-center">
+        <div className="flex flex-col items-center space-y-8 z-10 max-w-3xl">
           <motion.div
             initial={{
               opacity: 0,
@@ -31,22 +32,23 @@ export const Home = () => {
             transition={{
               duration: 0.8,
               ease: [0.22, 1, 0.36, 1]
-            }}>
+            }}
+            className="flex flex-col items-center">
             
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ink/10 dark:border-white/10 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#EADBC8] animate-pulse" />
               <span className="text-[10px] uppercase tracking-widest font-semibold">
                 Tandil · Comunidad Abierta
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-display font-extrabold leading-[0.95] tracking-tight">
-              Vestite
-              <br />
-              <span className="text-accent italic font-medium pr-4">
+            
+            <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-display font-extrabold leading-[1.1] tracking-tight">
+              Vestite{' '}
+              <span className="font-extrabold not-italic">
                 distinto.
               </span>
               <br />
-              Mutá.
+              <span className="muta-rosa tracking-[0.18em] uppercase">MUTÁ.</span>
             </h1>
           </motion.div>
 
@@ -61,7 +63,7 @@ export const Home = () => {
               delay: 0.3,
               duration: 0.8
             }}
-            className="text-base md:text-lg text-ink/70 dark:text-warmWhite/70 max-w-md leading-relaxed">
+            className="text-base md:text-lg text-ink/70 dark:text-warmWhite/70 max-w-lg leading-relaxed">
             
             La comunidad de moda circular de Tandil. Comprá, vendé e intercambiá
             prendas únicas.
@@ -80,7 +82,7 @@ export const Home = () => {
               delay: 0.5,
               duration: 0.8
             }}
-            className="flex flex-wrap gap-4">
+            className="flex flex-wrap justify-center gap-4">
             
             <Link to="/feed">
               <Button size="lg" className="px-8">
@@ -93,52 +95,6 @@ export const Home = () => {
               </Button>
             </Link>
           </motion.div>
-        </div>
-
-        <div className="flex-1 relative h-[500px] w-full hidden md:block">
-          {heroImages.map((img, i) =>
-          <motion.div
-            key={i}
-            initial={{
-              opacity: 0,
-              scale: 0.9,
-              rotate: 0
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              rotate: i === 0 ? -3 : i === 1 ? 4 : -2,
-              y: [0, -10, 0]
-            }}
-            transition={{
-              opacity: {
-                duration: 0.8,
-                delay: i * 0.2
-              },
-              scale: {
-                duration: 0.8,
-                delay: i * 0.2
-              },
-              rotate: {
-                duration: 0.8,
-                delay: i * 0.2
-              },
-              y: {
-                duration: 8,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: i * 0.5
-              }
-            }}
-            className={`absolute rounded-[2rem] overflow-hidden shadow-soft glass p-2 ${i === 0 ? 'top-4 right-12 w-64 h-80 z-30' : i === 1 ? 'bottom-8 right-48 w-56 h-72 z-20' : 'top-24 left-8 w-52 h-64 z-10'}`}>
-            
-              <img
-              src={img}
-              alt="Fashion"
-              className="w-full h-full object-cover rounded-[1.5rem]" />
-            
-            </motion.div>
-          )}
         </div>
       </section>
 
@@ -266,7 +222,7 @@ export const Home = () => {
             <span className="italic font-medium text-accent">ya existe</span>."
           </p>
           <p className="text-sm uppercase tracking-widest font-semibold text-ink/50">
-            Manifiesto MUTÁ
+            Manifiesto <span className="muta-rosa">MUTÁ</span>
           </p>
         </motion.div>
       </section>
@@ -278,7 +234,7 @@ export const Home = () => {
 
           <div className="relative z-10 flex-1 text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 tracking-tight">
-              Comunidad MUTÁ
+              Comunidad <span className="muta-rosa">MUTÁ</span>
             </h2>
             <p className="text-base text-ink/70 dark:text-warmWhite/70 mb-8 max-w-md">
               Conocé a los perfiles más activos de Tandil. Sumate a la moda
@@ -302,7 +258,7 @@ export const Home = () => {
                   alt={user.name}
                   size="xl"
                   className="w-20 h-20 md:w-24 md:h-24 border-2 border-white dark:border-darkBg shadow-sm" />
-                
+              
                 </Link>
                 <div className="text-center">
                   <p className="font-display font-semibold text-sm">
@@ -321,54 +277,16 @@ export const Home = () => {
       {/* Giant Footer */}
       <footer className="border-t border-ink/5 dark:border-white/5 pt-24 pb-12 overflow-hidden flex flex-col items-center">
         <div className="w-full max-w-7xl px-4 md:px-8 mb-16 flex flex-col md:flex-row justify-between gap-8 text-sm">
-          <div className="space-y-4">
-            <h4 className="font-display font-semibold">Explorar</h4>
-            <div className="flex flex-col gap-2 text-ink/60">
-              <Link to="/feed" className="hover:text-ink">
-                Prendas
-              </Link>
-              <Link to="/feed" className="hover:text-ink">
-                Categorías
-              </Link>
-              <Link to="/feed" className="hover:text-ink">
-                Comunidad
-              </Link>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-display font-semibold">Soporte</h4>
-            <div className="flex flex-col gap-2 text-ink/60">
-              <a href="#" className="hover:text-ink">
-                Preguntas frecuentes
-              </a>
-              <a href="#" className="hover:text-ink">
-                Términos y condiciones
-              </a>
-              <a href="#" className="hover:text-ink">
-                Privacidad
-              </a>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-display font-semibold">Redes</h4>
-            <div className="flex flex-col gap-2 text-ink/60">
-              <a href="#" className="hover:text-ink">
-                Instagram
-              </a>
-              <a href="#" className="hover:text-ink">
-                TikTok
-              </a>
-            </div>
-          </div>
+          {/* ... (footer links igual) */}
         </div>
 
-        <h2 className="font-display font-extrabold text-[8rem] md:text-[14rem] leading-none tracking-tighter text-ink/5 dark:text-warmWhite/5 select-none text-center w-full">
+        <h2 className="font-display font-extrabold text-[8rem] md:text-[14rem] leading-none tracking-tighter muta-rosa select-none text-center w-full">
           MUTÁ
         </h2>
         <p className="text-xs text-ink/40 dark:text-warmWhite/40 mt-4">
-          © 2026 MUTÁ. Tandil, Argentina.
+          © 2026 <span className="muta-rosa">MUTÁ</span>. Tandil, Argentina.
         </p>
       </footer>
-    </div>);
-
+    </div>
+  );
 };

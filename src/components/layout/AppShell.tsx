@@ -13,12 +13,14 @@ import {
 'lucide-react';
 import { cn } from '../../utils/cn';
 import { motion } from 'framer-motion';
+
 export const AppShell = ({ children }: {children: React.ReactNode;}) => {
   const location = useLocation();
   const isLanding = location.pathname === '/';
   const isAuth = location.pathname === '/auth';
   const isOnboarding = location.pathname === '/onboarding';
   const showSidebar = !isLanding && !isAuth && !isOnboarding;
+  
   const sidebarLinks = [
   {
     id: 'feed',
@@ -68,8 +70,7 @@ export const AppShell = ({ children }: {children: React.ReactNode;}) => {
           <div className="p-8">
             <Link
             to="/"
-            className="font-display font-extrabold text-3xl tracking-[0.18em] text-ink dark:text-warmWhite">
-            
+            className="muta-rosa font-display font-extrabold text-3xl tracking-[0.18em]">
               MUTÁ
             </Link>
           </div>
@@ -139,5 +140,4 @@ export const AppShell = ({ children }: {children: React.ReactNode;}) => {
 
       <BottomNav />
     </div>);
-
 };

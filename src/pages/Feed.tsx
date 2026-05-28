@@ -1,4 +1,4 @@
-import React, { useMemo, useState, Component } from 'react';
+import React, { useMemo, useState, ComponentType } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   SearchIcon,
@@ -17,6 +17,7 @@ import {
   DEFAULT_FILTERS,
   FilterState } from
 '../components/product/FilterSheet';
+
 type SortKey = 'cerca' | 'reciente' | 'popular' | 'precio_asc' | 'precio_desc';
 const SORT_OPTIONS: {
   key: SortKey;
@@ -56,6 +57,7 @@ export const Feed = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
   const [draftFilters, setDraftFilters] = useState<FilterState>(DEFAULT_FILTERS);
+  
   const filtered = useMemo(() => {
     let list = products.slice();
     if (activeType !== 'Todos') {
@@ -104,6 +106,7 @@ export const Feed = () => {
     }
     return list;
   }, [activeType, search, filters, sort]);
+
   const activeFilterCount =
   filters.conditions.length +
   filters.types.length +
@@ -111,6 +114,7 @@ export const Feed = () => {
   filters.priceMin > DEFAULT_FILTERS.priceMin ? 1 : 0) + (
   filters.priceMax < DEFAULT_FILTERS.priceMax ? 1 : 0) + (
   filters.maxDistanceKm < DEFAULT_FILTERS.maxDistanceKm ? 1 : 0);
+
   const openFilters = () => {
     setDraftFilters(filters);
     setFilterOpen(true);
@@ -122,7 +126,9 @@ export const Feed = () => {
   const resetFilters = () => {
     setDraftFilters(DEFAULT_FILTERS);
   };
+  
   const spotlight = filtered.find((p) => p.likes > 200) || filtered[0];
+
   return (
     <div className="min-h-screen pt-4 md:pt-8 px-4 md:px-8 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-4">
@@ -137,11 +143,12 @@ export const Feed = () => {
         </div>
       </div>
 
-      <div className="sticky top-0 z-30 pt-2 pb-3 bg-warmWhite/85 dark:bg-darkBg/85 backdrop-blur-xl -mx-4 px-4 md:mx-0 md:px-0">
+      {/* EL CAMBIO CLAVE: "bg-transparent". Ahora el bloque desaparece al 100% */}
+      <div className="sticky top-0 z-30 pt-2 pb-3 bg-transparent -mx-4 px-4 md:mx-0 md:px-0">
         <div className="flex gap-3 items-center mb-3">
           <div className="flex-1 relative">
             <SearchIcon
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40 dark:text-warmWhite/40"
+              className="absolute left-4 top-1/2 -translate-y-1/2 opacity-70 muta-rosa"
               size={20} />
             
             <input
@@ -149,7 +156,7 @@ export const Feed = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar prendas, marcas o usuarios..."
-              className="w-full bg-softGray dark:bg-darkBg-alt rounded-full py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-accent transition-all" />
+              className="search-input w-full rounded-full py-3 pl-12 pr-4 transition-all" />
             
           </div>
           <motion.button
@@ -388,6 +395,7 @@ export const Feed = () => {
     </div>);
 
 };
+
 const FilterChip: React.FC<{
   label: string;
   onRemove: () => void;
