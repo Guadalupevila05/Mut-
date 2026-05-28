@@ -2,22 +2,20 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XIcon } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { CONDITIONS, PRODUCT_TYPES, STYLES } from '../../data/mockData';
+import { CONDITIONS, PRODUCT_TYPES, STYLES } from '../../data/constants';
 export type FilterState = {
   conditions: string[];
   types: string[];
   styles: string[];
   priceMin: number;
   priceMax: number;
-  maxDistanceKm: number;
 };
 export const DEFAULT_FILTERS: FilterState = {
   conditions: [],
   types: [],
   styles: [],
   priceMin: 0,
-  priceMax: 100000,
-  maxDistanceKm: 10
+  priceMax: 100000
 };
 interface FilterSheetProps {
   open: boolean;
@@ -102,34 +100,6 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
             </div>
 
             <div className="flex-1 overflow-y-auto px-6 py-6 space-y-10">
-              {/* Distance */}
-              <section>
-                <div className="flex justify-between items-baseline mb-4">
-                  <h3 className="text-xs uppercase tracking-wider font-semibold text-ink/60 dark:text-warmWhite/60">
-                    Cercanía
-                  </h3>
-                  <span className="text-sm font-medium text-ink dark:text-warmWhite">
-                    {filters.maxDistanceKm === 10 ?
-                  '10+ km' :
-                  `Hasta ${filters.maxDistanceKm} km`}
-                  </span>
-                </div>
-                <input
-                type="range"
-                min={1}
-                max={10}
-                step={0.5}
-                value={filters.maxDistanceKm}
-                onChange={(e) =>
-                onChange({
-                  ...filters,
-                  maxDistanceKm: Number(e.target.value)
-                })
-                }
-                className="w-full accent-accent" />
-              
-              </section>
-
               {/* Price */}
               <section>
                 <div className="flex justify-between items-baseline mb-4">
