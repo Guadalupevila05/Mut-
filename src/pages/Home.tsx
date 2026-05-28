@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { products, PRODUCT_TYPES } from '../data/mockData';
+import { supabase } from '../lib/supabaseClient';
+import { useEffect } from 'react';
 
 // Botón tipo píldora para ingresar (arriba a la derecha)
 const AuthButton = () => (
@@ -19,6 +21,18 @@ const AuthButton = () => (
 
 export const Home = () => {
   const featuredTypes = PRODUCT_TYPES.slice(0, 8);
+
+  useEffect(() => {
+    async function probarConexion() {
+      const { data, error } = await supabase.from('products').select('*');
+      if (error) {
+        console.error("Algo falló:", error.message);
+      } else {
+        console.log("¡CONEXIÓN EXITOSA! Los productos son:", data);
+      }
+    }
+    probarConexion();
+  }, []);
 
   return (
     <div className="min-h-screen pt-12 pb-12">
