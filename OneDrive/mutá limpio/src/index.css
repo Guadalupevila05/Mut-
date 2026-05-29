@@ -1,0 +1,84 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+/* TAILWIND IMPORTS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body, .dark body {
+    background-color: #2D241E !important; 
+    color: #EADBC8 !important;            
+    font-family: 'Quicksand', sans-serif !important;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ==========================================================================
+   1. UNIFICACIÓN DE COLOR ROSA MUTÁ (#FFB7C5)
+   ========================================================================== */
+.muta-rosa, 
+.muta-text,
+[title*="MUTÁ"],
+.text-accent {
+  color: #FFB7C5 !important;
+}
+
+.bg-accent,
+.hover\:bg-accent:hover {
+  background-color: #FFB7C5 !important;
+}
+
+.border-accent {
+  border-color: #FFB7C5 !important;
+}
+
+/* ==========================================================================
+   2. BUSCADOR SIN FONDO OSCURO Y SIN BRILLO
+   ========================================================================== */
+
+/* A. ELIMINAMOS EL FONDO DEL CONTENEDOR */
+div:has(> input[type="text"]),
+div:has(> input[type="search"]),
+div:has(> .search-input) {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* B. EL DISEÑO DEL INPUT: Borde rosa sólido, fondo transparente, SIN BRILLO */
+input[type="text"], 
+input[type="search"],
+.search-input {
+  background-color: transparent !important; 
+  background: transparent !important;
+  border: 1px solid #FFB7C5 !important; 
+  color: #FDF6F0 !important;
+  border-radius: 50px !important;
+  
+  padding: 12px 24px 12px 48px !important; 
+  
+  box-shadow: none !important; 
+  outline: none !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Cuando hacés clic para escribir (Focus) */
+input[type="text"]:focus, 
+input[type="search"]:focus,
+.search-input:focus {
+  box-shadow: none !important; 
+  border: 1px solid #FFB7C5 !important;
+}
+
+input::placeholder {
+  color: #FFB7C5 !important;
+  opacity: 0.6 !important;
+}
